@@ -1,8 +1,30 @@
 import React from "react";
-import "./ForColGrid.css";
+import PropTypes from "prop-types";
+import "./FourColGrid.css";
 
-const FourGrid = props => {
-  return <div>FourColGrid</div>;
+const FourColGrid = props => {
+  const renderElements = () => {
+    const gridElements = props.children.map((element, i) => {
+      return (
+        <div key={i} className="rmdb-grid-element">
+          {element}
+        </div>
+      );
+    });
+    return gridElements;
+  };
+
+  return (
+    <div className="rmdb-grid">
+      {props.header && !props.loading ? <h1>{props.header}</h1> : null}
+      <div className="rmdb-grid-content">{renderElements()}</div>
+    </div>
+  );
 };
 
-export default ForColGrid;
+FourColGrid.proTypes = {
+  header: PropTypes.string,
+  loading: PropTypes.boolean
+};
+
+export default FourColGrid;
